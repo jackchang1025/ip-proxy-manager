@@ -1,0 +1,38 @@
+{
+    "name": "weijiajia/proxy-manager",
+    "description": "A powerful PHP proxy service management framework providing a unified interface for multiple proxy providers.",
+    "type": "library",
+    "keywords": [
+        "proxy",
+        "ip proxy",
+        "proxy manager",
+        "stormproxies",
+        "huasheng"
+    ],
+    "homepage": "https://github.com/yourusername/proxy-manager",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "weijiajia",
+            "email": "shadowmatthew1025@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "saloonphp/saloon": "^3.10",
+        "psr/log": "^3.0",
+        "illuminate/collections": "^11.26",
+        "nesbot/carbon": "^3.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Weijiajia\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

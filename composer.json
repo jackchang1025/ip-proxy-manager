@@ -1,15 +1,16 @@
 {
-    "name": "weijiajia/proxy-manager",
-    "description": "A powerful PHP proxy service management framework providing a unified interface for multiple proxy providers.",
+    "name": "weijiajia/ip-proxy-manager",
+    "description": "A powerful PHP IP proxy service management framework providing a unified interface for multiple proxy providers.",
     "type": "library",
     "keywords": [
-        "proxy",
         "ip proxy",
         "proxy manager",
+        "proxy service",
         "stormproxies",
-        "huasheng"
+        "huasheng",
+        "ip management"
     ],
-    "homepage": "https://github.com/yourusername/proxy-manager",
+    "homepage": "https://github.com/jackchang1025/ip-proxy-manager",
     "license": "MIT",
     "authors": [
         {

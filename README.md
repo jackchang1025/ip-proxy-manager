@@ -1,6 +1,6 @@
-# Proxy Manager
+# Ip Proxy Manager
 
-Proxy Manager 是一个强大的 PHP 代理服务管理框架,为多个代理提供商提供统一的接口
+Ip Proxy Manager 是一个 PHP Ip 代理服务管理框架,为多个代理提供商提供统一的接口
 
 ## 支持平台
 - [StormProxies](https://www.stormproxies.cn/)

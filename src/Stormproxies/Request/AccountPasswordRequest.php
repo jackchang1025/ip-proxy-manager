@@ -2,7 +2,6 @@
 
 namespace Weijiajia\Stormproxies\Request;
 
-use Weijiajia\BaseDto;
 use Weijiajia\ProxyResponse;
 use Weijiajia\Stormproxies\DTO\AccountPasswordDto;
 use Illuminate\Support\Collection;
@@ -67,21 +66,23 @@ class AccountPasswordRequest extends Request
      * @return mixed
      * @throws \JsonException
      */
-    public function createDtoFromResponse(Response $response): BaseDto
+    public function createDtoFromResponse(Response $response): AccountPasswordDto
     {
         $data = $response->json();
 
-        return $this->dto->setProxyList(
-            (new Collection())->push(
-                new ProxyResponse(
-                    host: $data['host'] ?? null,
-                    port: $data['port'] ?? null,
-                    user: $data['username'] ?? null,
-                    password: $data['password'] ?? null,
-                    url: $data['url'] ?? null,
-                )
+        $result = (new Collection())->push(
+            new ProxyResponse(
+                host: $data['host'] ?? null,
+                port: $data['port'] ?? null,
+                user: $data['username'] ?? null,
+                password: $data['password'] ?? null,
+                url: $data['url'] ?? null,
             )
         );
+
+        $this->dto->setProxyList($result);
+
+        return $this->dto;
     }
 
 

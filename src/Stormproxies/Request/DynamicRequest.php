@@ -3,6 +3,7 @@
 namespace Weijiajia\Stormproxies\Request;
 
 use Weijiajia\BaseDto;
+use Weijiajia\Exception\ProxyException;
 use Weijiajia\ProxyResponse;
 use Weijiajia\Stormproxies\DTO\DynamicDto;
 use Illuminate\Support\Collection;
@@ -27,13 +28,18 @@ class DynamicRequest extends Request
     /**
      * @param Response $response
      * @return mixed
-     * @throws \JsonException
+     * @throws \JsonException|ProxyException
      */
     public function createDtoFromResponse(Response $response): BaseDto
     {
-        return $this->dto->setProxyList((new Collection($response->json()['data']['list'] ?? []))->map(function(string $item){
+        $data = $response->json();
+        if (empty($data['data']['list'])){
+            throw new ProxyException($response,$response->body());
+        }
 
-            list($host, $port) = explode(':', $item);
+         $this->dto->setProxyList((new Collection($response->json()['data']['list'] ?? []))->map(function(string $item){
+
+            [$host, $port] = explode(':', $item);
 
             return new ProxyResponse(
                 host: $host,
@@ -41,15 +47,8 @@ class DynamicRequest extends Request
                 url: $item,
             );
         }));
-    }
 
-    public function hasRequestFailed(Response $response): ?bool
-    {
-        $data = $response->json();
-        if (empty($data['data']['list'])){
-            return true;
-        }
-        return null;
+        return $this->dto;
     }
 
     protected function defaultQuery(): array

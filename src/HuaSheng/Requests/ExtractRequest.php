@@ -3,6 +3,7 @@
 namespace Weijiajia\HuaSheng\Requests;
 
 use Weijiajia\BaseDto;
+use Weijiajia\Exception\ProxyException;
 use Weijiajia\HuaSheng\DTO\ExtractDto;
 use Weijiajia\ProxyResponse;
 use Carbon\Carbon;
@@ -11,7 +12,7 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
 
-class Extract extends Request
+class ExtractRequest extends Request
 {
     /**
      * The HTTP method of the request
@@ -28,34 +29,25 @@ class Extract extends Request
     /**
      * @param Response $response
      * @return BaseDto
-     * @throws \JsonException
+     * @throws \JsonException|ProxyException
      */
     public function createDtoFromResponse(Response $response): BaseDto
     {
-        return $this->dto->setProxyList((new Collection($response->json()))->map(fn(array $item) => new ProxyResponse(
+        $data = $response->json();
+        if ($data['status'] !== '0' || empty($data['list'])) {
+            throw new ProxyException($response,$response->body());
+        }
+
+        $this->dto->setProxyList((new Collection($response->json()))->map(fn(array $item) => new ProxyResponse(
             host: $item['sever'] ?? null,
             port: $item['port'] ?? null,
             user: $item['user'] ?? null,
             password: $item['password'] ?? null,
             expireTime: isset($item['expire_time']) ? Carbon::parse($item['expire_time']) : null,
         )));
+
+        return $this->dto;
     }
-
-    /**
-     * @param Response $response
-     * @return bool|null
-     * @throws \JsonException
-     */
-    public function hasRequestFailed(Response $response): ?bool
-    {
-        $data = $response->json();
-        if ($data['status'] !== '0' || empty($data['list'])) {
-            return true;
-        }
-
-        return null;
-    }
-
     /**
      * The endpoint for the request
      */

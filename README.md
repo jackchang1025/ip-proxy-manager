@@ -27,7 +27,7 @@ Ip Proxy Manager 是一个 PHP Ip 代理服务管理框架,为多个代理提供
 
 ```bash
 
-composer require weijiajia/proxy-manager
+composer require weijiajia/ip-proxy-manager
 ```
 
 ## 使用方法
@@ -38,7 +38,7 @@ composer require weijiajia/proxy-manager
 
 use Weijiajia\Stormproxies\StormConnector;
 use Weijiajia\HuaSheng\HuaShengConnector;
-use Weijiajia\HuaSheng\Requests\Extract;
+use Weijiajia\HuaSheng\Requests\ExtractRequest;
 use Weijiajia\HuaSheng\Dto\ExtractDto;
 use Psr\Log\LoggerInterface;
 
@@ -58,7 +58,7 @@ $dto = new ExtractDto([
 ]);
 
 //构建请求
-$request = new Extract($dto);
+$request = new ExtractRequest($dto);
 //获取代理数据
 $response = $connector->send($request);
 

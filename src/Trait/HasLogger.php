@@ -2,15 +2,12 @@
 
 namespace Weijiajia\Trait;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Saloon\Http\PendingRequest;
+use Saloon\Http\Response;
 
 trait HasLogger
 {
-    protected bool $booted = false;
-
     protected ?LoggerInterface $logger = null;
 
     public function withLogger(LoggerInterface $logger): static
@@ -26,13 +23,12 @@ trait HasLogger
 
     protected function defaultRequestMiddle(): \Closure
     {
-        return function (RequestInterface $request){
-            $this->getLogger()
-                ?->debug('request', [
+        return function (PendingRequest $request){
+            $this->getLogger()?->debug('request', [
                 'method'  => $request->getMethod(),
                 'uri'     => (string) $request->getUri(),
-                'headers' => $request->getHeaders(),
-                'body'    => (string)$request->getBody(),
+                'headers' => $request->headers(),
+                'body'    => (string)$request->body(),
             ]);
             return $request;
         };
@@ -40,12 +36,11 @@ trait HasLogger
 
     protected function defaultResponseMiddle(): \Closure
     {
-        return function (ResponseInterface $response){
-            $this->getLogger()
-                ?->info('response', [
-                'status'  => $response->getStatusCode(),
-                'headers' => $response->getHeaders(),
-                'body'    => (string) $response->getBody(),
+        return function (Response $response){
+            $this->getLogger()?->debug('response', [
+                'status'  => $response->status(),
+                'headers' => $response->headers(),
+                'body'    => $response->body(),
             ]);
             return $response;
         };
@@ -53,15 +48,7 @@ trait HasLogger
 
     public function bootHasLogger(PendingRequest $pendingRequest): void
     {
-        if ($this->booted || $this->getLogger() === null) {
-            return;
-        }
-
-        $this->booted = true;
-
-        $connector = $pendingRequest->getConnector();
-
-        $connector->middleware()->onRequest($this->defaultRequestMiddle());
-        $connector->middleware()->onResponse($this->defaultResponseMiddle());
+        $pendingRequest->getConnector()->middleware()->onRequest($this->defaultRequestMiddle());
+        $pendingRequest->getConnector()->middleware()->onResponse($this->defaultResponseMiddle());
     }
 }

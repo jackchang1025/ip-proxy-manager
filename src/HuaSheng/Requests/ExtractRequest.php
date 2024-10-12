@@ -1,15 +1,15 @@
 <?php
 
-namespace Weijiajia\HuaSheng\Requests;
+namespace Weijiajia\IpProxyManager\HuaSheng\Requests;
 
-use Weijiajia\BaseDto;
-use Weijiajia\Exception\ProxyException;
-use Weijiajia\HuaSheng\DTO\ExtractDto;
-use Weijiajia\ProxyResponse;
+use Weijiajia\IpProxyManager\BaseDto;
+use Weijiajia\IpProxyManager\Exception\ProxyException;
+use Weijiajia\IpProxyManager\HuaSheng\DTO\ExtractDto;
+use Weijiajia\IpProxyManager\ProxyResponse;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use Weijiajia\IpProxyManager\Request;
 use Saloon\Http\Response;
 
 class ExtractRequest extends Request
@@ -19,8 +19,10 @@ class ExtractRequest extends Request
      */
     protected Method $method = Method::GET;
 
-    public function __construct(protected ExtractDto $dto)
+    public function __construct(ExtractDto $dto)
     {
+        parent::__construct($dto);
+
         if (empty($this->dto->get('session'))) {
             throw new \InvalidArgumentException("请配置代理 session");
         }
@@ -38,11 +40,12 @@ class ExtractRequest extends Request
             throw new ProxyException($response,$response->body());
         }
 
-        $this->dto->setProxyList((new Collection($response->json()))->map(fn(array $item) => new ProxyResponse(
+        $this->dto->setProxyList((new Collection($data['list']))->map(fn(array $item) => new ProxyResponse(
             host: $item['sever'] ?? null,
             port: $item['port'] ?? null,
             user: $item['user'] ?? null,
             password: $item['password'] ?? null,
+            url: "http://{$item['sever']}:{$item['port']}",
             expireTime: isset($item['expire_time']) ? Carbon::parse($item['expire_time']) : null,
         )));
 

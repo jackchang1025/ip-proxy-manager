@@ -1,8 +1,8 @@
 <?php
 
-namespace Weijiajia\Stormproxies\DTO;
+namespace Weijiajia\IpProxyManager\Stormproxies\DTO;
 
-use Weijiajia\BaseDto;
+use Weijiajia\IpProxyManager\BaseDto;
 use Saloon\Contracts\DataObjects\WithResponse;
 use Saloon\Traits\Responses\HasResponse;
 

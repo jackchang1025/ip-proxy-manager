@@ -36,10 +36,10 @@ composer require weijiajia/ip-proxy-manager
 
 ```php
 
-use Weijiajia\Stormproxies\StormConnector;
-use Weijiajia\HuaSheng\HuaShengConnector;
-use Weijiajia\HuaSheng\Requests\ExtractRequest;
-use Weijiajia\HuaSheng\Dto\ExtractDto;
+use Weijiajia\IpProxyManager\Stormproxies\StormConnector;
+use Weijiajia\IpProxyManager\HuaSheng\HuaShengConnector;
+use Weijiajia\IpProxyManager\HuaSheng\Requests\ExtractRequest;
+use Weijiajia\IpProxyManager\HuaSheng\Dto\ExtractDto;
 use Psr\Log\LoggerInterface;
 
 //构建一个花生代理连接器
@@ -82,13 +82,13 @@ foreach ($proxyList as $proxy) {
 
 ```php
 
-use Weijiajia\Stormproxies\StormConnector;
-use Weijiajia\HuaSheng\HuaShengConnector;
+use Weijiajia\IpProxyManager\Stormproxies\StormConnector;
+use Weijiajia\IpProxyManager\HuaSheng\HuaShengConnector;
 
-use Weijiajia\Stormproxies\DTO\AccountPasswordDto;
-use Weijiajia\Stormproxies\Requests\AccountPasswordRequest;
-use Weijiajia\Stormproxies\Requests\DynamicRequest;
-use Weijiajia\Stormproxies\StormConnector;
+use Weijiajia\IpProxyManager\Stormproxies\DTO\AccountPasswordDto;
+use Weijiajia\IpProxyManager\Stormproxies\Requests\AccountPasswordRequest;
+use Weijiajia\IpProxyManager\Stormproxies\Requests\DynamicRequest;
+use Weijiajia\IpProxyManager\Stormproxies\StormConnector;
 
 use Psr\Log\LoggerInterface;
 
@@ -140,9 +140,9 @@ foreach ($proxyList as $proxy) {
 
 ```php
 // src/NewProxy/NewProxyConnector.php
-namespace Weijiajia\NewProxy;
+namespace Weijiajia\IpProxyManager\NewProxy;
 
-use Weijiajia\ProxyConnector;
+use Weijiajia\IpProxyManager\ProxyConnector;
 
 class NewProxyConnector extends ProxyConnector
 {
@@ -153,9 +153,9 @@ class NewProxyConnector extends ProxyConnector
 }
 
 // src/NewProxy/Dto/GetProxyDto.php
-namespace Weijiajia\NewProxy\Dto;
+namespace Weijiajia\IpProxyManager\NewProxy\Dto;
 
-use Weijiajia\BaseDto;
+use Weijiajia\IpProxyManager\BaseDto;
 
 class GetProxyDto extends BaseDto
 {
@@ -164,11 +164,11 @@ class GetProxyDto extends BaseDto
 }
 
 // src/NewProxy/Requests/GetProxy.php
-namespace Weijiajia\NewProxy\Requests;
+namespace Weijiajia\IpProxyManager\NewProxy\Requests;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Weijiajia\NewProxy\Dto\GetProxyDto;
+use Weijiajia\IpProxyManager\NewProxy\Dto\GetProxyDto;
 
 class GetProxyRequest extends Request
 {
@@ -193,9 +193,9 @@ class GetProxyRequest extends Request
 }
 
 // 使用示例
-use Weijiajia\NewProxy\NewProxyConnector;
-use Weijiajia\NewProxy\Dto\GetProxyDto;
-use Weijiajia\NewProxy\Requests\GetProxy;
+use Weijiajia\IpProxyManager\NewProxy\NewProxyConnector;
+use Weijiajia\IpProxyManager\NewProxy\Dto\GetProxyDto;
+use Weijiajia\IpProxyManager\NewProxy\Requests\GetProxy;
 
 $connector = new NewProxyConnector();
 $connector->withLogger(new YourLoggerImplementation());

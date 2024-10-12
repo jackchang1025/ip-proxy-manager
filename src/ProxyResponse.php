@@ -1,6 +1,6 @@
 <?php
 
-namespace Weijiajia;
+namespace Weijiajia\IpProxyManager;
 
 use Carbon\Carbon;
 

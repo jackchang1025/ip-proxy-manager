@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Weijiajia\\": "src/"
+            "Weijiajia\\IpProxyManager\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Weijiajia\\Tests\\": "tests/"
+            "Weijiajia\\IpProxyManager\\Tests\\": "tests/"
         }
     },
     "config": {

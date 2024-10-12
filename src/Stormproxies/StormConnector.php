@@ -1,8 +1,8 @@
 <?php
 
-namespace Weijiajia\Stormproxies;
+namespace Weijiajia\IpProxyManager\Stormproxies;
 
-use Weijiajia\ProxyConnector;
+use Weijiajia\IpProxyManager\ProxyConnector;
 use Saloon\Traits\Plugins\AcceptsJson;
 
 class StormConnector extends ProxyConnector

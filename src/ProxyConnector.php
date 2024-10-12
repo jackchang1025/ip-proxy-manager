@@ -1,9 +1,9 @@
 <?php
 
-namespace Weijiajia;
+namespace Weijiajia\IpProxyManager;
 
 use Saloon\Http\Connector;
-use Weijiajia\Trait\HasLogger;
+use Weijiajia\IpProxyManager\Trait\HasLogger;
 
 abstract class ProxyConnector extends Connector
 {

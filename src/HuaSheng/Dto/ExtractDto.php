@@ -1,8 +1,8 @@
 <?php
 
-namespace Weijiajia\HuaSheng\Dto;
+namespace Weijiajia\IpProxyManager\HuaSheng\Dto;
 
-use Weijiajia\BaseDto;
+use Weijiajia\IpProxyManager\BaseDto;
 use Saloon\Contracts\DataObjects\WithResponse;
 use Saloon\Traits\Responses\HasResponse;
 

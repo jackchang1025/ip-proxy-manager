@@ -1,15 +1,15 @@
 <?php
 
-namespace Weijiajia\Stormproxies\Request;
+namespace Weijiajia\IpProxyManager\Stormproxies\Request;
 
-use Weijiajia\ProxyResponse;
-use Weijiajia\Stormproxies\DTO\AccountPasswordDto;
+use Weijiajia\IpProxyManager\ProxyResponse;
+use Weijiajia\IpProxyManager\Request;
+use Weijiajia\IpProxyManager\Stormproxies\DTO\AccountPasswordDto;
 use Illuminate\Support\Collection;
 use Saloon\Enums\Method;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 use Saloon\Http\PendingRequest;
-use Saloon\Http\Request;
 use Saloon\Http\Response;
 
 class AccountPasswordRequest extends Request
@@ -19,8 +19,10 @@ class AccountPasswordRequest extends Request
      */
     protected Method $method = Method::GET;
 
-    public function __construct(public AccountPasswordDto $dto)
+    public function __construct(AccountPasswordDto $dto)
     {
+        parent::__construct($dto);
+
         if (empty($this->dto->get('username'))) {
             throw new \InvalidArgumentException("请配置代理用户名");
         }

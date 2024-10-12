@@ -1,8 +1,8 @@
 <?php
 
-namespace Weijiajia\HuaSheng;
+namespace Weijiajia\IpProxyManager\HuaSheng;
 
-use Weijiajia\ProxyConnector;
+use Weijiajia\IpProxyManager\ProxyConnector;
 use Saloon\Traits\Plugins\AcceptsJson;
 
 class HuaShengConnector extends ProxyConnector

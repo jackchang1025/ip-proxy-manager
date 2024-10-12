@@ -1,6 +1,6 @@
 <?php
 
-namespace Weijiajia\Trait;
+namespace Weijiajia\IpProxyManager\Trait;
 
 use Psr\Log\LoggerInterface;
 use Saloon\Http\PendingRequest;

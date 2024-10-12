@@ -1,14 +1,14 @@
 <?php
 
-namespace Weijiajia\Stormproxies\Request;
+namespace Weijiajia\IpProxyManager\Stormproxies\Request;
 
-use Weijiajia\BaseDto;
-use Weijiajia\Exception\ProxyException;
-use Weijiajia\ProxyResponse;
-use Weijiajia\Stormproxies\DTO\DynamicDto;
+use Weijiajia\IpProxyManager\BaseDto;
+use Weijiajia\IpProxyManager\Exception\ProxyException;
+use Weijiajia\IpProxyManager\ProxyResponse;
+use Weijiajia\IpProxyManager\Stormproxies\DTO\DynamicDto;
 use Illuminate\Support\Collection;
 use Saloon\Enums\Method;
-use Saloon\Http\Request;
+use Weijiajia\IpProxyManager\Request;
 use Saloon\Http\Response;
 
 class DynamicRequest extends Request
@@ -18,8 +18,10 @@ class DynamicRequest extends Request
      */
     protected Method $method = Method::GET;
 
-    public function __construct(public DynamicDto $dto)
+    public function __construct(DynamicDto $dto)
     {
+        parent::__construct($dto);
+
         if (empty($this->dto->get('app_key'))) {
             throw new \InvalidArgumentException("请配置代理 key");
         }
